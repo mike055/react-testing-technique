@@ -1,11 +1,14 @@
 import React from 'react';
-import GlobalStyle from './styles';
+import GlobalStyle, { AppContainer } from './styles';
+import Todos from './components/to-do';
 
 const App = () => {
   return (
     <React.Fragment>
       <GlobalStyle />
-      <h1>Hello World</h1>
+      <AppContainer>
+        <Todos />
+      </AppContainer>
     </React.Fragment>
   );
 }
