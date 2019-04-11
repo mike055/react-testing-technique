@@ -8,7 +8,7 @@ describe('to-do-input', () => {
 
   beforeEach(()=> {
     callback = jest.fn();
-    const { getByLabelText } = render(<ToDoInput onSubmit={callback} />);
+    const { getByLabelText } = render(<ToDoInput addTodo={callback} />);
     renderedInput = getByLabelText('Enter a To Do:');
   });
 

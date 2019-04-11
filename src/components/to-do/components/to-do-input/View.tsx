@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Container, LargeInput, InputLabel } from './styles';
 
-type Props = {
-  onSubmit: (value: String) => void 
+interface Props {
+  addTodo: (task: string) => void;
 }
 
-const View = ( { onSubmit }: Props ) => {
+const View = ( { addTodo }: Props ) => {
   const [inputValue, setInputValue] = useState('');
 
 
@@ -14,7 +14,7 @@ const View = ( { onSubmit }: Props ) => {
       const target = e.target as HTMLInputElement;
 
       if (target.value !== '') {
-        onSubmit(target.value);
+        addTodo(target.value);
         setInputValue('');
       }
     }
