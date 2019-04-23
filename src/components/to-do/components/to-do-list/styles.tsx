@@ -28,12 +28,10 @@ export const ToDoList = styled.ul`
 export const ToDoListItem = styled.li`
   padding: 1em;
   margin-bottom: .125em;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   list-style: none;
-  text-transform: uppercase;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
 
   visibility: hidden;
   animation: ${rolldown} 2s 1;
@@ -46,5 +44,20 @@ export const ToDoListItem = styled.li`
   
   &:nth-child(2n+1) {
     background-color: #333;
-  }
+  } 
+`;
+
+export const TodoText = styled.button<{ completed: boolean }>`
+  ${props => props.completed ? 'text-decoration: line-through;' : '' }
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
+  border: 0;
+  background: inherit;
+  font-size: 16px;
+`;
+
+export const TodoRemoveIcon = styled.button`
+  border: 0;
+  background: inherit;
 `;

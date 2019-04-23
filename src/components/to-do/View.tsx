@@ -8,15 +8,18 @@ import { ToDo } from './types';
 
 const View = () => {
   const todos: ToDo[] = [
-    { id: 1, task: 'Do stuff', completed: false },
-    { id: 2, task: 'Do stuff', completed: false },
-    { id: 3, task: 'Do stuff', completed: true },
-    { id: 4, task: 'Do stuff', completed: true },
-    { id: 5, task: 'Do stuff', completed: false },
+    { id: 1, task: 'Do stuff 1', completed: true },
+    { id: 2, task: 'Do stuff 2', completed: false },
+    { id: 3, task: 'Do stuff 3', completed: false },
+    { id: 4, task: 'Do stuff 4', completed: true },
   ];
 
   const addTodo = (task: string) => {
     console.log(task);
+  };
+
+  const markTodoAsComplete = (todo: ToDo) => {
+    console.log(todo);
   };
 
   const removeTodo = (todo: ToDo) => {
@@ -26,7 +29,7 @@ const View = () => {
   return (
     <Container>
       <ToDoInput addTodo={ addTodo } />
-      <ToDoList todos={todos} removeTodo={ removeTodo } />
+      <ToDoList todos={todos} markTodoAsComplete={ markTodoAsComplete } removeTodo={ removeTodo } />
     </Container>
   )
 };
