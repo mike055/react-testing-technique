@@ -925,7 +925,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.3.4", "@babel/runtime@^7.4.2":
+"@babel/runtime@^7.3.4", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.3":
   version "7.4.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.3.tgz#79888e452034223ad9609187a0ad1fe0d2ad4bdc"
   dependencies:
@@ -7462,7 +7462,7 @@ react-scripts@2.1.8:
   optionalDependencies:
     fsevents "1.2.4"
 
-react-testing-library@^6.0.0:
+react-testing-library@^6.1.0:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/react-testing-library/-/react-testing-library-6.1.2.tgz#f6bba6eeecedac736eb00b22b4c70bae04535a4f"
   dependencies:
