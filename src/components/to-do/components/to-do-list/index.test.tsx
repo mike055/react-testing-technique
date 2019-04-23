@@ -41,10 +41,10 @@ describe('to-do-list', () => {
 
       const todoList = getByTestId('todo-list');
 
-      expect(todoList.childNodes[0].textContent).toBe(getTodoById(2).task);
-      expect(todoList.childNodes[1].textContent).toBe(getTodoById(3).task);
-      expect(todoList.childNodes[2].textContent).toBe(getTodoById(1).task);
-      expect(todoList.childNodes[3].textContent).toBe(getTodoById(4).task);
+      expect(todoList.childNodes[0].textContent).toBe(getTodoById(3).task);
+      expect(todoList.childNodes[1].textContent).toBe(getTodoById(2).task);
+      expect(todoList.childNodes[2].textContent).toBe(getTodoById(4).task);
+      expect(todoList.childNodes[3].textContent).toBe(getTodoById(1).task);
     });
 
     describe('when the text of a todo is clicked', () => {

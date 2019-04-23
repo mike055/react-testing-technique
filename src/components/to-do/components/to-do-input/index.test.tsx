@@ -4,7 +4,8 @@ import ToDoInput from './index';
  
 
 describe('to-do-input', () => {
-  let callback, renderedInput;
+  let callback: any;
+  let renderedInput: HTMLElement;
 
   beforeEach(()=> {
     callback = jest.fn();

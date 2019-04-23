@@ -25,10 +25,10 @@ const View = ({ todos, markTodoAsComplete, removeTodo }: Props) => {
     }
 
     if ( a.id < b.id ) {
-      return -1;
+      return 1;
     }
 
-    return 1;
+    return -1;
 
   });
 
