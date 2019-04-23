@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container } from './styles';
 
 import ToDoInput from './components/to-do-input';
@@ -7,23 +7,58 @@ import ToDoList from './components/to-do-list';
 import { ToDo } from './types';
 
 const View = () => {
-  const todos: ToDo[] = [
-    { id: 1, task: 'Do stuff 1', completed: true },
-    { id: 2, task: 'Do stuff 2', completed: false },
-    { id: 3, task: 'Do stuff 3', completed: false },
-    { id: 4, task: 'Do stuff 4', completed: true },
-  ];
+  const [todos, setTodos] = useState<ToDo[]>([]);
+  const [lastTodoId, setLastTodoId] = useState(0);
+  
+  const getNextTodoId = () => {
+    const nextTodoId = lastTodoId + 1;
+    setLastTodoId(nextTodoId);
+
+    return nextTodoId;
+  }
 
   const addTodo = (task: string) => {
-    console.log(task);
+    const newTodo = {
+      id: getNextTodoId(),
+      task,
+      completed: false
+    }
+    setTodos([
+      ...todos,
+      newTodo,
+    ]);
   };
 
   const markTodoAsComplete = (todo: ToDo) => {
-    console.log(todo);
+    const updatedTodos = todos.map( (t) => {
+      let completed = t.completed;
+
+      if(t.id === todo.id) {
+        completed = true;
+      }
+
+      return {
+        id: t.id,
+        task: t.task,
+        completed,
+      };
+    });
+
+    setTodos(updatedTodos);
   };
 
   const removeTodo = (todo: ToDo) => {
-    console.log(todo);
+    const filteredTodos = todos.filter((t)=> t.id !== todo.id);
+
+    const updatedTodos = filteredTodos.map( (t) => {
+      return {
+        id: t.id,
+        task: t.task,
+        completed: t.completed,
+      };
+    });
+
+    setTodos(updatedTodos);
   };
 
   return (
