@@ -34,7 +34,7 @@ const View = ({ todos, markTodoAsComplete, removeTodo }: Props) => {
 
   return (
     <Container>
-      <ToDoList data-testid="todo-list">
+      <ToDoList aria-label="List of Todos">
         {sortedTodos.map(t => {
           return (
             <ToDoListItem key={t.id}>

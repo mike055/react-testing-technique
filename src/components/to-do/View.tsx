@@ -74,7 +74,7 @@ const View = () => {
   }
 
   return (
-    <Container aria-label="Todos">
+    <Container>
       <ToDoInput addTodo={ addTodo } />
       <ToDoList todos={todos} markTodoAsComplete={ markTodoAsComplete } removeTodo={ removeTodo } />
     </Container>      

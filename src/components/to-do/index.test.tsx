@@ -37,7 +37,7 @@ describe('todos', () => {
         expect(queryByLabelText('Todos')).not.toBeInTheDocument();
 
         await waitForElement(() =>
-          getByLabelText('Todos'),
+        getByLabelText('List of Todos'),
         );
 
         expect(queryByLabelText('Loading')).not.toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('todos', () => {
       const { getByLabelText } = renderedResult;
 
       await waitForElement(() =>
-        getByLabelText('Todos'),
+        getByLabelText('List of Todos'),
       );
 
       addTodo(renderedResult, firstTodo);
@@ -67,16 +67,16 @@ describe('todos', () => {
   
       it('adds it to the top of the list', async () => {
         const renderedResult = render(<Todos />);
-        const { getByLabelText, getByTestId } = renderedResult;
+        const { getByLabelText } = renderedResult;
   
         await waitForElement(() =>
-          getByLabelText('Todos'),
+          getByLabelText('List of Todos'),
         );
 
         addTodo(renderedResult, firstTodo);
         addTodo(renderedResult, secondTodo);
 
-        const todoList = getByTestId('todo-list');
+        const todoList = getByLabelText('List of Todos');
 
         expect(todoList.childNodes[0].textContent).toBe(secondTodo);
         expect(todoList.childNodes[1].textContent).toBe(firstTodo);
@@ -91,17 +91,17 @@ describe('todos', () => {
 
     it('it moves to the bottom of the list', async () => {
       const renderedResult = render(<Todos />);
-      const { getByLabelText, getByTestId } = renderedResult;
+      const { getByLabelText } = renderedResult;
 
       await waitForElement(() =>
-        getByLabelText('Todos'),
+        getByLabelText('List of Todos'),
       );
 
       addTodo(renderedResult, todo1);
       addTodo(renderedResult, todo2);
       addTodo(renderedResult, todo3);
 
-      const todoList = getByTestId('todo-list');
+      const todoList = getByLabelText('List of Todos');
 
       expect(todoList.childNodes[0].textContent).toBe(todo3);
       expect(todoList.childNodes[1].textContent).toBe(todo2);
@@ -125,7 +125,7 @@ describe('todos', () => {
       const { getByLabelText, getByTestId } = renderedResult;
 
       await waitForElement(() =>
-        getByLabelText('Todos'),
+        getByLabelText('List of Todos'),
       );
 
       addTodo(renderedResult, todo1);

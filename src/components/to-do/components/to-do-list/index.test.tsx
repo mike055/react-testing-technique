@@ -37,9 +37,9 @@ describe('to-do-list', () => {
   describe('when the todos are rendered', ()=> {
 
     it('renders not completed todos at the top of the list and completed todos at the bottom', () => {
-      const { getByTestId } = renderedResult;
+      const { getByLabelText } = renderedResult;
 
-      const todoList = getByTestId('todo-list');
+      const todoList = getByLabelText('List of Todos');
 
       expect(todoList.childNodes[0].textContent).toBe(getTodoById(3).task);
       expect(todoList.childNodes[1].textContent).toBe(getTodoById(2).task);
