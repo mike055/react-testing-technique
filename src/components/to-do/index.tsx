@@ -1,3 +1,4 @@
 import View from './View';
+import withApplicationState from './higher-order/withApplicationState';
 
-export default View;
+export default withApplicationState(View);
