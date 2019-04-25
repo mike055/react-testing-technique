@@ -17,14 +17,20 @@ describe('todos', () => {
   };
 
   const assertTodoInList = (renderedResult: RenderResult, todoText: string) => {
-    const { queryByText } = renderedResult;
-    expect(queryByText(todoText)).toBeInTheDocument();
+    const { queryByLabelText } = renderedResult;
+    expect(queryByLabelText(todoText)).toBeInTheDocument();
   };
 
   const assertTodoNotInList = (renderedResult: RenderResult, todoText: string) => {
-    const { queryByText } = renderedResult;
-    expect(queryByText(todoText)).not.toBeInTheDocument();
+    const { queryByLabelText } = renderedResult;
+    expect(queryByLabelText(todoText)).not.toBeInTheDocument();
   };
+
+  const assertTodoInputIsEmpty = (renderedResult: RenderResult,) => {
+    const renderedInput = getByLabelText(renderedResult.container, 'Enter a To Do:') as HTMLInputElement;
+    expect(renderedInput.value).toBe('')
+  }
+
 
   describe('when component loaded', () => {
 
@@ -45,10 +51,28 @@ describe('todos', () => {
     });
   });
 
+  describe('when attempting to add an empty todo', () => {
+
+    it('does not add it to the list', async () => {
+      const renderedResult = render(<Todos />);
+      const { getByLabelText } = renderedResult;
+
+      await waitForElement(() =>
+        getByLabelText('List of Todos'),
+      );
+
+      addTodo(renderedResult, '');
+
+      const todoList = getByLabelText('List of Todos');
+
+      expect(todoList.childNodes.length).toBe(0);
+    });
+  });
+
   describe('when adding a todo', () => {
     const firstTodo = "This is a test TODO!";
 
-    it('adds it to the list', async () => {
+    it('adds it to the list and clears the field', async () => {
       const renderedResult = render(<Todos />);
       const { getByLabelText } = renderedResult;
 
@@ -59,6 +83,7 @@ describe('todos', () => {
       addTodo(renderedResult, firstTodo);
 
       assertTodoInList(renderedResult, firstTodo);
+      assertTodoInputIsEmpty(renderedResult);
     });
 
     describe('when adding a second todo', () => {
@@ -88,6 +113,22 @@ describe('todos', () => {
     const todo1 = "Todo number 1";
     const todo2 = "Todo number 2";
     const todo3 = "Todo number 3";
+
+    it('is marked as complete', async () => {
+      const renderedResult = render(<Todos />);
+      const { getByLabelText } = renderedResult;
+
+      await waitForElement(() =>
+        getByLabelText('List of Todos'),
+      );
+
+      addTodo(renderedResult, todo1);
+
+      const { getByText } = renderedResult;
+      fireEvent.click(getByText(todo1));
+
+      assertTodoInList(renderedResult, `${todo1} is completed`);
+    });
 
     it('it moves to the bottom of the list', async () => {
       const renderedResult = render(<Todos />);

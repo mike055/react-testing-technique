@@ -36,9 +36,20 @@ const View = ({ todos, markTodoAsComplete, removeTodo }: Props) => {
     <Container>
       <ToDoList aria-label="List of Todos">
         {sortedTodos.map(t => {
+
+          const todoTextLabel = (
+            t.completed ? t.task + ' is completed' : t.task
+          );
+
           return (
             <ToDoListItem key={t.id}>
-              <TodoText onClick={() => markTodoAsComplete(t)} completed={t.completed}>{t.task}</TodoText>
+              <TodoText
+                onClick={() => markTodoAsComplete(t)}
+                completed={t.completed}
+                aria-label={ todoTextLabel }
+              >
+                {t.task}
+              </TodoText>
               <TodoRemoveIcon onClick={ () => removeTodo(t) } aria-label={ 'Remove ' + t.task }>
                 <TrashCan />
               </TodoRemoveIcon>
