@@ -5,12 +5,12 @@ import ToDoInput from './index';
 
 describe('to-do-input', () => {
   let callback: any;
-  let renderedInput: HTMLElement;
+  let renderedInput: HTMLInputElement;
 
   beforeEach(()=> {
     callback = jest.fn();
     const { getByLabelText } = render(<ToDoInput addTodo={callback} />);
-    renderedInput = getByLabelText('Enter a To Do:');
+    renderedInput = getByLabelText('Enter a To Do:') as HTMLInputElement;
   });
 
   afterEach(()=> {
