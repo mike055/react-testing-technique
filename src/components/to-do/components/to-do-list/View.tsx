@@ -4,7 +4,6 @@ import { Container, ToDoList, ToDoListItem, TodoText, TodoRemoveIcon } from "./s
 import sortTodos from '../../logic/sortTodos';
 
 import TrashCan from '../../../icons/TrashCan';
-
 import { ToDo } from "../../types";
 
 interface Props {

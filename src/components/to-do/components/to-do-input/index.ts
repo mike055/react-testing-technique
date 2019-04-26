@@ -1,3 +1,4 @@
 import View from './View';
+import connected from './higher-order/connected';
 
-export default View;
+export default connected(View);
