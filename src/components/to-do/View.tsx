@@ -12,10 +12,16 @@ const View = () => {
   const [todos, setTodos] = useState<ToDo[]>([]);
   const [lastTodoId, setLastTodoId] = useState(0);
   
+  let timeoutId: number;
+
   useEffect(()=> {
-    setTimeout(()=> {
+    timeoutId = setTimeout(()=> {
       setIsLoading(false);
     }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
   },[]);
 
   const getNextTodoId = () => {

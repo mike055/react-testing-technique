@@ -32,28 +32,31 @@ describe('todos', () => {
   }
 
 
-  describe('when component loaded', () => {
+  describe('when the component is rendered', () => {
 
-    describe('when loading is complete', () => {
-      it('the loading overlay is shown and then removed', async () => {
-        const renderedResult = render(<Todos />);
-        const { getByLabelText, queryByLabelText } = renderedResult;
+    it('initially shows a loading state', async () => {
+      const renderedResult = render(<Todos />);
+      const { queryByLabelText } = renderedResult;
 
-        expect(queryByLabelText('Loading')).toBeInTheDocument();
-        expect(queryByLabelText('Todos')).not.toBeInTheDocument();
+      expect(queryByLabelText('Loading')).toBeInTheDocument();
+      expect(queryByLabelText('Todos')).not.toBeInTheDocument();
+    });
 
-        await waitForElement(() =>
+    it('waits for the todos to load and removes the loading state', async () => {
+      const renderedResult = render(<Todos />);
+      const { queryByLabelText, getByLabelText } = renderedResult;
+
+      await waitForElement(() =>
         getByLabelText('List of Todos'),
-        );
+      );
 
-        expect(queryByLabelText('Loading')).not.toBeInTheDocument();
-      });
+      expect(queryByLabelText('Loading')).not.toBeInTheDocument();
     });
   });
 
-  describe('when attempting to add an empty todo', () => {
+  describe('when adding a todo', () => {
 
-    it('does not add it to the list', async () => {
+    it('does not add it to the list when the todo input is empty', async () => {
       const renderedResult = render(<Todos />);
       const { getByLabelText } = renderedResult;
 
@@ -67,13 +70,10 @@ describe('todos', () => {
 
       expect(todoList.childNodes.length).toBe(0);
     });
-  });
-
-  describe('when adding a todo', () => {
-    const firstTodo = "This is a test TODO!";
 
     it('adds it to the list and clears the field', async () => {
-      const renderedResult = render(<Todos />);
+      const firstTodo = "This is a test TODO!";
+      const renderedResult = render(<Todos />);  
       const { getByLabelText } = renderedResult;
 
       await waitForElement(() =>
@@ -86,11 +86,12 @@ describe('todos', () => {
       assertTodoInputIsEmpty(renderedResult);
     });
 
-    describe('when adding a second todo', () => {
+    describe('and when a second todo is added', () => {
 
-      const secondTodo = "Second Todo";
-  
-      it('adds it to the top of the list', async () => {
+      it('is added to the top of the list', async () => {
+        const firstTodo = "This is a test TODO!";  
+        const secondTodo = "Second Todo";
+
         const renderedResult = render(<Todos />);
         const { getByLabelText } = renderedResult;
   
@@ -109,7 +110,7 @@ describe('todos', () => {
     });
   });
 
-  describe('when marking a todo as complete', () => {
+  describe('when clicking on a todo', () => {
     const todo1 = "Todo number 1";
     const todo2 = "Todo number 2";
     const todo3 = "Todo number 3";
@@ -130,7 +131,7 @@ describe('todos', () => {
       assertTodoInList(renderedResult, `${todo1} is completed`);
     });
 
-    it('it moves to the bottom of the list', async () => {
+    it('moves to the bottom of the list', async () => {
       const renderedResult = render(<Todos />);
       const { getByLabelText } = renderedResult;
 
@@ -157,13 +158,13 @@ describe('todos', () => {
     });
   });
 
-  describe('when removing a todo', () => {
+  describe('when clicking on the trash can next to a todo', () => {
     const todo1 = "Todo number 1";
     const todo2 = "Todo number 2";
-    
-    it('it is removed from the list', async () => {
+
+    it('is removed from the list', async () => {
       const renderedResult = render(<Todos />);
-      const { getByLabelText, getByTestId } = renderedResult;
+      const { getByLabelText } = renderedResult;
 
       await waitForElement(() =>
         getByLabelText('List of Todos'),
