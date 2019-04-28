@@ -15,9 +15,10 @@ const withApplicationState = (ComposedComponent: React.ComponentType<any>) => {
       todos: [],
       lastTodoId: 0,
     };
+    timeoutId: number = 0;
 
     componentDidMount() {
-      setTimeout(()=> {
+      this.timeoutId = setTimeout(()=> {
         this.setState(prevState => {
           return {
             ...prevState,
@@ -26,6 +27,10 @@ const withApplicationState = (ComposedComponent: React.ComponentType<any>) => {
         });
       }, 1000);
     };
+
+    componentWillUnmount(){
+      clearTimeout(this.timeoutId);
+    }
   
     getNextTodoId = () => {
       const nextTodoId = this.state.lastTodoId + 1;
