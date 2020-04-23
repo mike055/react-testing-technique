@@ -1,10 +1,11 @@
 import React from 'react';
-import { render, cleanup, fireEvent, RenderResult, getByLabelText, waitForElement } from 'react-testing-library';
-import 'jest-dom/extend-expect';
+import { render, cleanup, fireEvent, RenderResult, getByLabelText, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 
 import Todos from './index';
 
 describe('todos', () => {
+
+  jest.useFakeTimers();
 
   afterEach(()=> {
     cleanup();
@@ -46,11 +47,10 @@ describe('todos', () => {
       const renderedResult = render(<Todos />);
       const { queryByLabelText, getByLabelText } = renderedResult;
 
-      await waitForElement(() =>
-        getByLabelText('List of Todos'),
-      );
+      jest.runAllTimers();
 
       expect(queryByLabelText('Loading')).not.toBeInTheDocument();
+      expect(getByLabelText('List of Todos')).toBeInTheDocument();
     });
   });
 
@@ -60,9 +60,7 @@ describe('todos', () => {
       const renderedResult = render(<Todos />);
       const { getByLabelText } = renderedResult;
 
-      await waitForElement(() =>
-        getByLabelText('List of Todos'),
-      );
+      jest.runAllTimers();
 
       addTodo(renderedResult, '');
 
@@ -74,11 +72,8 @@ describe('todos', () => {
     it('adds it to the list and clears the field', async () => {
       const firstTodo = "This is a test TODO!";
       const renderedResult = render(<Todos />);  
-      const { getByLabelText } = renderedResult;
 
-      await waitForElement(() =>
-        getByLabelText('List of Todos'),
-      );
+      jest.runAllTimers();
 
       addTodo(renderedResult, firstTodo);
 
@@ -95,9 +90,7 @@ describe('todos', () => {
         const renderedResult = render(<Todos />);
         const { getByLabelText } = renderedResult;
   
-        await waitForElement(() =>
-          getByLabelText('List of Todos'),
-        );
+        jest.runAllTimers();
 
         addTodo(renderedResult, firstTodo);
         addTodo(renderedResult, secondTodo);
@@ -117,11 +110,8 @@ describe('todos', () => {
 
     it('is marked as complete', async () => {
       const renderedResult = render(<Todos />);
-      const { getByLabelText } = renderedResult;
 
-      await waitForElement(() =>
-        getByLabelText('List of Todos'),
-      );
+      jest.runAllTimers();
 
       addTodo(renderedResult, todo1);
 
@@ -135,9 +125,7 @@ describe('todos', () => {
       const renderedResult = render(<Todos />);
       const { getByLabelText } = renderedResult;
 
-      await waitForElement(() =>
-        getByLabelText('List of Todos'),
-      );
+      jest.runAllTimers();
 
       addTodo(renderedResult, todo1);
       addTodo(renderedResult, todo2);
@@ -166,9 +154,7 @@ describe('todos', () => {
       const renderedResult = render(<Todos />);
       const { getByLabelText } = renderedResult;
 
-      await waitForElement(() =>
-        getByLabelText('List of Todos'),
-      );
+      jest.runAllTimers();
 
       addTodo(renderedResult, todo1);
       addTodo(renderedResult, todo2);

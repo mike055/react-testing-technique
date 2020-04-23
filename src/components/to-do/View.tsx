@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Container } from './styles';
 
 import ToDoInput from './components/to-do-input';
@@ -11,16 +11,15 @@ const View = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [todos, setTodos] = useState<ToDo[]>([]);
   const [lastTodoId, setLastTodoId] = useState(0);
+  const timeoutId = useRef(0)
   
-  let timeoutId: number;
-
   useEffect(()=> {
-    timeoutId = setTimeout(()=> {
+    timeoutId.current = setTimeout(()=> {
       setIsLoading(false);
     }, 1000);
 
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId.current);
     }
   },[]);
 

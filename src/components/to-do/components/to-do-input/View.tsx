@@ -10,7 +10,7 @@ const View = ( { addTodo }: Props ) => {
 
 
   const onKeyPress = (e: React.KeyboardEvent) => {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       const target = e.target as HTMLInputElement;
 
       if (target.value !== '') {
