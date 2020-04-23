@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { removeTodo, completeTodo } from "../../../../../state/actions";
 import { ToDo } from "../../../types";
 import { Dispatch } from "redux";
-import { ToDoListProps } from "../types";
 
 const mapStateToProps = (state: any) => {
   return {
